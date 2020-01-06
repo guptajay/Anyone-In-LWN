@@ -6,8 +6,6 @@
       <%- include ('./partials/header') %>
       
       <p class="lead mb-3">Welcome <%- name %></p>
-
-      <div class="card mb-4">
         <ul class="list-group list-group-flush">
           <% for (var i = 0; i<status.length; i++) { 
           let currentColor = null;
@@ -23,14 +21,20 @@
 
               <div class="col">
                   <%= status[i].name %>
-                  <span class="<%= currentColor %>"> - <%= status[i].status %></span>
+                  <br />
+                  <span class="<%= currentColor %>"><%= status[i].status %></span>
               </div>
 
-              <% if(currentColor == 'text-success') { %>
+             
               <div class="col">
+              
+                <% if(currentColor == 'text-success') { %>
+              
                 <i class="fas fa-location-arrow fa-1x"></i> <% if(status[i].location != '') { %>
                 <%= status[i].location %> <% } else { %> Not Available <% } %>
+               
               <% } %>
+                
               </div>
 
             </div>
@@ -38,7 +42,7 @@
           </li>
           <% } %>
         </ul>
-      </div>
+     
       
       <hr class="style5 mt-5 mb-5" />
       <div class="col-md-8 m-auto">
@@ -68,8 +72,9 @@
       </form>
 
     </div>
-
-      <a href="/users/logout" class="btn btn-primary mt-5" >Logout</a>
+<div class="container">
+      <a href="/users/logout" class="btn btn-outline-danger mt-5 mb-5" >Logout</a>
+</div>
     </div>
   </div>
 </div>
