@@ -1,0 +1,75 @@
+<div class="row mt-5">
+  <div class="col-md-6 m-auto">
+    <div class="container">
+      
+      <!-- Header -->
+      <%- include ('./partials/header') %>
+      
+      <p class="lead mb-3">Welcome <%- name %></p>
+
+      <div class="card mb-4">
+        <ul class="list-group list-group-flush">
+          <% for (var i = 0; i<status.length; i++) { 
+          let currentColor = null;
+          if(status[i].status != 'Out of Library') {
+            currentColor = 'text-success'
+          } else {
+            currentColor = 'text-danger'
+          }
+          %>
+          <li class="list-group-item">
+
+            <div class="row">
+
+              <div class="col">
+                  <%= status[i].name %>
+                  <span class="<%= currentColor %>"> - <%= status[i].status %></span>
+              </div>
+
+              <% if(currentColor == 'text-success') { %>
+              <div class="col">
+                <i class="fas fa-location-arrow fa-1x"></i> <% if(status[i].location != '') { %>
+                <%= status[i].location %> <% } else { %> Not Available <% } %>
+              <% } %>
+              </div>
+
+            </div>
+
+          </li>
+          <% } %>
+        </ul>
+      </div>
+      
+      <hr class="style5 mt-5 mb-5" />
+      <div class="col-md-8 m-auto">
+      <h5>Update your Status</h5>
+      <!-- Any Messages -->
+      <%- include ('./partials/messages') %>
+      <form action="/users/dashboard" method="POST">
+        <div class="form-group">
+        <select class="custom-select" id="userStatus" name = "userStatus">
+          <option value="In the Library" name = "IL" id = "IL">In the Library</option>
+          <option value="Out of Library" name = "OL" id = "OL">Out of Library</option>
+        </select>
+        </div>
+
+        <div class="form-group">
+          <label for="microlocation">Micro-Location <i>(optional)</i></label>
+          <input
+            type="microlocation"
+            id="microlocation"
+            name="microlocation"
+            class="form-control"
+            placeholder="Enter Micro-Location (e.g. AK 16)"
+          />
+        </div>
+        <input type="hidden" id="name" name="name" value="<%- name %>">
+        <button type="submit" class="btn btn-primary btn-block mt-2">Update Status</button>
+      </form>
+
+    </div>
+
+      <a href="/users/logout" class="btn btn-primary mt-5" >Logout</a>
+    </div>
+  </div>
+</div>
